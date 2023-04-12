@@ -1,0 +1,30 @@
+#circle {
+    position: fixed;
+    background: currentColor;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+  }
+  
+  /* Example monochromatic color schemes */
+  .color-scheme-1 {
+    background-color: #2d2d2d;
+    color: #5c5c5c;
+  }
+  .color-scheme-2 {
+    background-color: #273f66;
+    color: #506a99;
+  }
+  .color-scheme-3 {
+    background-color: #4c4c4c;
+    color: #8c8c8c;
+  }
+  .color-scheme-4 {
+    background-color: #283618;
+    color: #4c6a32;
+  }
+  .color-scheme-5 {
+    background-color: #3d1e3d;
+    color: #7a407a;
+  }
+  
