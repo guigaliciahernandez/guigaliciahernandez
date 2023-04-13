@@ -6,18 +6,7 @@ body {
     padding: 0;
     background-color: #ffffff;
     font-size: 14px;
-}
-
-
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    max-width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    margin: 20px auto;
-    background-color: transparent;
+    transition: color 1s ease-in-out; /* Add this line */
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,6 +14,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 8px;
     font-weight: bold;
+    
 }
 
 h2 {
@@ -68,6 +58,7 @@ ul li {
     background-color: #aaaaaa;
     width: 100%;
     clear: both;
+    
 }
 
 
@@ -75,12 +66,14 @@ ul li {
 #print-toggle, #dark-mode-toggle {
     position: fixed;
     top: 20px;
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
+
 }
+
 
 #dark-mode-toggle {
     right: 170px;
@@ -93,6 +86,7 @@ ul li {
 .dark-mode {
     background-color: black;
     color: #fff;
+   
 }
 
 .dark-mode a {
@@ -101,13 +95,14 @@ ul li {
 
 .dark-mode .container {
     background-color: transparent;
+   
 }
 
 /* Two-column layout */
 .two-columns {
     display: flex;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 25px;
 }
 
 .column {
@@ -120,7 +115,7 @@ ul li {
 .three-columns {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 40px;
 }
 
 .three-columns .column {
@@ -130,9 +125,12 @@ ul li {
 }
 
 @media print {
+    .container {
+        padding: 0;
+      }
     @page {
         size: A4;
-        margin: 10mm;
+        margin: 0mm;
     }
   
     body {
@@ -155,6 +153,31 @@ br.custom-break {
     display: block;
     margin-bottom: 1px;
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    max-width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 20px auto;
+    background-color: transparent;
+
+}
+
+
+.content-container {
+    position: relative;
+
+}
+
+.circle {
+    position: absolute;
+    pointer-events: none;
+
+}
+
 
 .color-scheme-1 {
     background-color: rgb(0, 18, 168);
@@ -210,4 +233,19 @@ br.custom-break {
     font-family: 'Merriweather', serif;
 }
 
+.background-effect {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    mix-blend-mode: difference;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  
 
+  
+  

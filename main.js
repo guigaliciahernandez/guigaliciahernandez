@@ -10,7 +10,14 @@ function adjustMarginsForPrint() {
   const container = document.querySelector(".container");
   container.style.padding = "0";
   container.style.margin = "0";
+  
+  // Add an event listener to restore padding after print
+  window.addEventListener("afterprint", function() {
+    container.style.padding = "20px";
+    container.style.margin = "20px auto";
+  });
 }
+
 
 document.getElementById("print-toggle").addEventListener("click", function () {
   adjustMarginsForPrint();
@@ -37,45 +44,98 @@ function updateColorScheme() {
   colorIndex = (colorIndex + 1) % colorSchemes.length;
 }
 
-function animateColorDrop() {
-  const circle = document.createElement("div");
-  circle.style.position = "fixed";
-  circle.style.width = "0";
-  circle.style.height = "0";
-  circle.style.borderRadius = "50%";
-  circle.style.zIndex = "9999";
-  document.body.appendChild(circle);
-
-  const x = Math.floor(Math.random() * window.innerWidth);
-  const y = Math.floor(Math.random() * window.innerHeight);
-  circle.style.left = x + "px";
-  circle.style.top = y + "px";
-
-  const maxDimension = Math.max(
-    document.documentElement.clientWidth,
-    document.documentElement.clientHeight
-  );
-  const animationDuration = 1500;
-
-  anime({
-    targets: circle,
-    width: [0, maxDimension * 2],
-    height: [0, maxDimension * 2],
-    left: [x + "px", x - maxDimension + "px"],
-    top: [y + "px", y - maxDimension + "px"],
-    backgroundColor: colorSchemes[colorIndex].background,
-    duration: animationDuration,
-    easing: "easeInOutQuad",
-    complete: () => {
-      document.body.style.color = colorSchemes[colorIndex].text;
-      document.body.style.backgroundColor = colorSchemes[colorIndex].background;
-      document.body.style.fontFamily = colorSchemes[colorIndex].font;
-      colorIndex = (colorIndex + 1) % colorSchemes.length;
-      document.body.removeChild(circle);
-    },
-  });
+// Add a function to check if dark mode is enabled
+function isDarkModeEnabled() {
+  return document.body.classList.contains("dark-mode");
 }
 
-setInterval(animateColorDrop, 5000);
+function animateColorDrop(x, y) {
+  if (isDarkModeEnabled()) {
+    const circle = document.createElement("div");
+    circle.style.position = "fixed";
+    circle.style.width = "0";
+    circle.style.height = "0";
+    circle.style.borderRadius = "50%";
+    circle.style.zIndex = "-1";
+    document.body.appendChild(circle);
 
+    x = x || Math.floor(Math.random() * window.innerWidth);
+    y = y || Math.floor(Math.random() * window.innerHeight);
+    circle.style.left = x + "px";
+    circle.style.top = y + "px";
 
+    const maxDimension = Math.max(
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight
+    );
+    const animationDuration = 2000;
+
+    const textElements = document.querySelectorAll(
+      "h1, h2, h3, h4, h5, h6, p, li, a, .separator"
+    );
+
+    function changeSeparatorColor() {
+      const separators = document.querySelectorAll('.separator');
+      separators.forEach(separator => {
+        separator.style.backgroundColor = colorSchemes[colorIndex].text;
+      });
+    }
+    
+
+    anime({
+      targets: circle,
+      width: [0, maxDimension * 2],
+      height: [0, maxDimension * 2],
+      left: [x + "px", x - maxDimension + "px"],
+      top: [y + "px", y - maxDimension + "px"],
+      backgroundColor: [
+        colorSchemes[colorIndex].background,
+        colorSchemes[colorIndex].background
+      ],
+      duration: animationDuration,
+      easing: "easeInOutQuad",
+      begin: () => {
+        document.body.style.color = colorSchemes[colorIndex].text;
+        circle.style.backgroundColor = colorSchemes[colorIndex].background;
+        changeSeparatorColor();
+      },
+      
+      update: (anim) => {
+        // Get the position and dimensions of the circle
+        const circleRect = circle.getBoundingClientRect();
+
+        // Get all the text elements and check if they intersect with the circle
+        const textElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, a, .separator");
+        textElements.forEach(element => {
+          const elementRect = element.getBoundingClientRect();
+          if (rectsIntersect(circleRect, elementRect)) {
+            // Change the color and font family of the intersecting element
+            element.style.color = colorSchemes[colorIndex].text;
+            element.style.fontFamily = colorSchemes[colorIndex].font;
+          }
+        });
+      },
+      complete: () => {
+        document.body.style.backgroundColor = colorSchemes[colorIndex].background;
+        document.body.style.fontFamily = colorSchemes[colorIndex].font;
+        colorIndex = (colorIndex + 1) % colorSchemes.length;
+        document.body.removeChild(circle);
+      },
+    });
+  }
+}
+
+function rectsIntersect(rect1, rect2) {
+  return !(rect2.left > rect1.right ||
+           rect2.right < rect1.left ||
+           rect2.top > rect1.bottom ||
+           rect2.bottom < rect1.top);
+}
+
+// Set the interval for the automatic color change
+setInterval(() => animateColorDrop(), 3000);
+
+// Add an event listener for clicks
+document.addEventListener("click", (event) => {
+  animateColorDrop(event.clientX, event.clientY);
+});
