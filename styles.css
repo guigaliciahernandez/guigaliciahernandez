@@ -365,6 +365,7 @@ br.custom-break {
     opacity: 0;
     mix-blend-mode: difference;
     transition: opacity 1s ease-in-out;
+    z-index: -1; 
   }
   
   .normal-mode {
