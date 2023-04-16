@@ -80,6 +80,8 @@ ul li {
 
 .container {
     display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .button {
@@ -90,12 +92,15 @@ ul li {
   border: 5px white;
   cursor: pointer;
   background-color: black;
-  margin: 5px; /* Add some space between the buttons */
+  max-width: 150px; /* Prevent the buttons from becoming too large */
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
+    }
+    .button {
+        width: 100%; /* Make the buttons take the full width on mobile devices */
     }
 }
 
