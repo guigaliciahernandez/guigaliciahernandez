@@ -35,13 +35,25 @@ h4 {
     
 }
 
+a {
+    color: #0000EE; /* You can change this color to your preferred link color */
+    text-decoration: underline; /* You can also use "none" if you don't want an underline */
+    cursor: pointer;
+}
+
+a:hover {
+    color: #551A8B; /* You can change this color to your preferred link hover color */
+    text-decoration: underline; /* You can also use "none" if you don't want an underline on hover */
+}
+
+
 p, ul {
     margin-top: 0;
     margin-bottom: 8px;
 }
 
 p {
-    line-height: 1.4; /* Change this value to your preferred line spacing */
+    line-height: 1.6; /* Change this value to your preferred line spacing */
     
 }
 
@@ -56,7 +68,6 @@ ul li {
     
 }
 
-
 .separator {
     margin-top: 8px;
     margin-bottom: 8px;
@@ -67,31 +78,30 @@ ul li {
     
 }
 
+.container {
+    display: flex;
+}
 
+#print-toggle, #dark-mode-toggle {
+    border-radius: 10px;
+    position: fixed;
+    top: 20px;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 15px;
+    border: 5px white;
+    cursor: pointer;
+    background-color: black;
+}
+
+@media (max-width: 768px) {
     .container {
-        display: flex;
-      }
-      
-      #print-toggle, #dark-mode-toggle {
-        border-radius: 10px;
-        position: fixed;
-        top: 20px;
-        background-color: #000000;
-        color: #fff;
-        padding: 10px 15px;
-        border: 5px white;
-        cursor: pointer;
-        background-color: black;
-      }
-      
-      @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
-        }
-        #print-toggle, #dark-mode-toggle {
-          position: static; /* Reset the fixed positioning on mobile devices */
-        }
-      }
+        flex-direction: column;
+    }
+    #print-toggle, #dark-mode-toggle {
+        position: static; /* Reset the fixed positioning on mobile devices */
+    }
+}
 
 
 #dark-mode-toggle {
