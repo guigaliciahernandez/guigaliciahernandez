@@ -98,9 +98,6 @@ ul li {
         .container {
           flex-direction: column;
         }
-        #print-toggle, #dark-mode-toggle {
-          position: static; /* Reset the fixed positioning on mobile devices */
-        }
       }
 
 
