@@ -80,35 +80,27 @@ ul li {
 
 .container {
     display: flex;
-    justify-content: space-between;
     margin-top: 20px;
 }
 
 .button {
-  border-radius: 10px;
-  background-color: #000000;
-  color: #fff;
-  padding: 10px 10px;
-  border: 5px white;
-  cursor: pointer;
-  background-color: black;
-  max-width: 150px; /* Prevent the buttons from becoming too large */
+    border-radius: 10px;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 10px;
+    border: 5px white;
+    cursor: pointer;
+    background-color: black;
+    margin: 5px; /* Add some space between the buttons */
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-    }
-    .button {
-        width: 100%; /* Make the buttons take the full width on mobile devices */
+        align-items: flex-end; /* Align the buttons to the right on mobile devices */
     }
 }
 
-
-#dark-mode-toggle {
-    right: 170px;
-    margin-right: 10px;
-}
 
 #dark-mode-toggle span {
     animation-name: play-animation;
