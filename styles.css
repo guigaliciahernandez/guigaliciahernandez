@@ -78,13 +78,6 @@ ul li {
     
 }
 
-.container {
-    display: flex;
-    justify-content: flex-end;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-}
 
 .button {
     border-radius: 10px;
@@ -107,9 +100,6 @@ ul li {
         margin-bottom: 10px;
     }
 }
-
-
-
 
 
 
