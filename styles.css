@@ -81,9 +81,9 @@ ul li {
 .button-container {
     position: fixed;
     top: 20px;
-    right: 20px; /* Change to right */
+    right: 20px;
     display: flex;
-    z-index: 1000; /* Increase z-index to ensure buttons are above other elements */
+    z-index: 1000;
 }
 
 #print-toggle, #dark-mode-toggle {
@@ -106,22 +106,16 @@ ul li {
         margin-left: 0;
         margin-bottom: 10px;
     }
+
+    #print-toggle {
+        display: none; /* Hide the print button on mobile devices */
+    }
 }
 
 .content-container {
-    margin-top: 60px; /* Add margin to the top to prevent buttons from overlapping the text */
-    position: relative; /* Add relative positioning */
-    z-index: 1; /* Set a lower z-index */
-}
-
-
-.content-container {
-    margin-top: 60px; /* Add margin to the top to prevent buttons from overlapping the text */
-}
-
-
-.content-container {
-    margin-top: 60px; /* Add margin to the top to prevent buttons from overlapping the text */
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
 }
 
 
