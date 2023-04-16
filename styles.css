@@ -82,26 +82,20 @@ ul li {
     display: flex;
 }
 
-#print-toggle, #dark-mode-toggle {
-    border-radius: 10px;
-    position: fixed;
-    top: 20px;
-    background-color: #000000;
-    color: #fff;
-    padding: 10px 10px;
-    border: 5px white;
-    cursor: pointer;
-    background-color: black;
+.button {
+  border-radius: 10px;
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 10px;
+  border: 5px white;
+  cursor: pointer;
+  background-color: black;
+  margin: 5px; /* Add some space between the buttons */
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-    }
-    #print-toggle, #dark-mode-toggle {
-        position: relative;
-        /* Add a margin to make the element visible on smaller screens */
-        margin-top: 10px;
     }
 }
 
