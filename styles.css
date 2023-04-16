@@ -79,7 +79,15 @@ ul li {
 }
 
 
-.button {
+.container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    z-index: 2; /* Make sure the buttons are above other elements */
+}
+
+#print-toggle, #dark-mode-toggle {
     border-radius: 10px;
     background-color: #000000;
     color: #fff;
@@ -94,11 +102,15 @@ ul li {
     .container {
         flex-direction: column;
     }
-
-    .button {
+    
+    #print-toggle, #dark-mode-toggle {
         margin-left: 0;
         margin-bottom: 10px;
     }
+}
+
+.content-container {
+    margin-top: 60px; /* Add margin to the top to prevent buttons from overlapping the text */
 }
 
 
