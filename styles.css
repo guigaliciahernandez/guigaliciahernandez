@@ -68,20 +68,30 @@ ul li {
 }
 
 
-
-#print-toggle, #dark-mode-toggle {
-    border-radius: 10px 10px 10px 10px;
-    position: fixed;
-    top: 20px;
-    background-color: #000000;
-    color: #fff;
-    padding: 10px 15px;
-    border: 5px white;
-    cursor: pointer;
-    background-color: black;
-  
-
-}
+    .container {
+        display: flex;
+      }
+      
+      #print-toggle, #dark-mode-toggle {
+        border-radius: 10px;
+        position: fixed;
+        top: 20px;
+        background-color: #000000;
+        color: #fff;
+        padding: 10px 15px;
+        border: 5px white;
+        cursor: pointer;
+        background-color: black;
+      }
+      
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        #print-toggle, #dark-mode-toggle {
+          position: static; /* Reset the fixed positioning on mobile devices */
+        }
+      }
 
 
 #dark-mode-toggle {
