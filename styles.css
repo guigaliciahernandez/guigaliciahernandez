@@ -99,7 +99,9 @@ ul li {
         flex-direction: column;
     }
     #print-toggle, #dark-mode-toggle {
-        position: relative; /* Reset the fixed positioning on mobile devices */
+        position: relative;
+        /* Add a margin to make the element visible on smaller screens */
+        margin-top: 10px;
     }
 }
 
