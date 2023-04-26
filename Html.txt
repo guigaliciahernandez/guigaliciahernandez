@@ -24,12 +24,16 @@
         <h2>Education</h2>
         <ul>
             <li>
-                <h4>Parsons School of Design - The New School | Fulbright Scholar</h4>
+                <h4>Parsons School of Design (US) - The New School | Fulbright Scholar</h4>
                 <p>MS in Strategic Design and Management - May 2023</p>
             </li>
             <li>
-                <h4>Universidad Nacional Autónoma de México (UNAM) | UNIFE</h4>
-                <p>Bachelor's Degree in Product and Innovation Design - Dec 2020</p>
+                <h4>Universidad Nacional Autónoma de México (UNAM) </h4>
+                <p>Bachelor's Degree in Product Design - Dec 2020</p>
+            </li>
+            <li>
+                <h4>University of Ferrara (Italy) - UNIFE</h4>
+                <p>Academic Exchange Year - Innovation Design - 2017-18</p>
             </li>
         </div>
         <div class="column">
@@ -49,6 +53,15 @@
             <div class="column">
                 <!-- First column of experience items go here -->
                 <ul>
+    <li>
+        <h4>Ai.ly | Co-Founder & Strategic Design Lead | 2023 - Present (4 months)</h4>
+        <p>- Co-founded AI chatbot Ai.ly, focusing on mental wisdom and emotional intelligence</p>
+        <p>- Prioritized user-centric design and personalized content</p>
+        <p>- Managed website development and cross-functional team collaboration</p>
+        <p>- Employed data-driven insights for platform optimization</p>
+    </li>
+</ul>
+<ul>
                 <li>
                     <h4>VICE Media | Innovation & Strategy Designer (Inter) | Jan - May'22</h4>
                     <p>- Pioneered social impact media strategies for youth audiences</p>
