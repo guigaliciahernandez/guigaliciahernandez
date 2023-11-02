@@ -1,29 +1,32 @@
-let words = ['EMBRACE', 'THE', 'MOMENT,', 'FOR', 'EACH', 'DAY', 'BRINGS', 'A', 'NEW', 'BEGINNING.'];
-let currentSize = 5;  // font size in em
-let scalingFactor = 1.5;  // how much we increase the size each time
-let maxSize = 50;  // the size in em when we want to cover the screen
-let wordIndex = 0;
+let words = ['EMBRACE', 'THE', 'DAY', 'BECAUSE', 'EVERY', 'DAY', 'IS', 'A', 'NEW', 'START'];
+let currentIndex = 0;
 
 let colorSchemes = [
-    {background: '#FF5733', text: 'white', font: 'Orbitron'},
-    {background: '#33FF57', text: 'white', font: 'Great vibes'},
-    {background: '#5733FF', text: 'white', font: 'Alfa Slab One'},
-    {background: '#FF33F1', text: 'white', font: 'Cinzel'},
-    {background: '#33FFF1', text: 'white', font: 'Quicksand'},
+    {background: '#FF5733', text: 'white'},
+    {background: '#33FF57', text: 'white'},
+    {background: '#5733FF', text: 'white'},
+    {background: '#FF33F1', text: 'white'},
+    {background: '#33FFF1', text: 'white'},
 ];
 
 let colorIndex = 0;
+const liquidWord = document.getElementById('liquidWord');
 
-document.getElementById('liquidWord').addEventListener('click', function() {
-    // Word transition logic
-    wordIndex = (wordIndex + 1) % words.length;
-    currentSize = Math.min(maxSize, currentSize * scalingFactor);
-    this.style.fontSize = currentSize + "em";
-    this.innerHTML = words[wordIndex];
+liquidWord.addEventListener('click', function() {
+    animateColorDrop(event.clientX, event.clientY);
 
-    // Color transition logic
-    colorIndex = Math.floor(Math.random() * colorSchemes.length);
-    animateColorDrop(window.innerWidth / 2, window.innerHeight / 2);
+    if (currentIndex < words.length) {
+        liquidWord.innerText = words[currentIndex];
+        currentIndex++;
+    } else {
+        currentIndex = 0;
+        liquidWord.innerText = words[currentIndex];
+    }
+
+    this.style.transform = "scale(1.5)";
+    setTimeout(() => {
+        this.style.transform = "scale(1)";
+    }, 200);
 });
 
 function animateColorDrop(x, y) {
@@ -50,13 +53,16 @@ function animateColorDrop(x, y) {
         easing: "easeInOutQuad",
         begin: () => {
             document.body.style.color = colorSchemes[colorIndex].text;
-            document.body.style.fontFamily = colorSchemes[colorIndex].font;
             circle.style.backgroundColor = colorSchemes[colorIndex].background;
-            circle.style.boxShadow = "0 0 100px 30px " + colorSchemes[colorIndex].text;
         },
         complete: () => {
             document.body.style.backgroundColor = colorSchemes[colorIndex].background;
             document.body.removeChild(circle);
+            if (colorIndex < colorSchemes.length - 1) {
+                colorIndex++;
+            } else {
+                colorIndex = 0;
+            }
         }
     });
 }
@@ -65,4 +71,5 @@ function animateColorDrop(x, y) {
 setInterval(() => {
     animateColorDrop();
 }, 2000);
+
 
