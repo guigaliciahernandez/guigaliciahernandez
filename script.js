@@ -1,56 +1,54 @@
-const phrases = ["Innovation", "Design", "Creativity", "Excellence"];
-let index = 0;
-const textElement = document.getElementById("phrase");
+let scene, camera, renderer, controls, spheres = [];
 
-let scene, camera, renderer, sphere;
-let mouseX = 0, mouseY = 0;
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
+// Scene & Camera
+scene = new THREE.Scene();
+camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
 
-init();
-animate();
+// Renderer
+renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById('scene-container').appendChild(renderer.domElement);
 
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    
-    let geometry = new THREE.SphereGeometry(0.5, 32, 32);
-    let material = new THREE.MeshNormalMaterial();
-    
-    sphere = new THREE.Mesh(geometry, material);
+// Add Spheres with Gradient
+let geometry = new THREE.SphereGeometry(1, 32, 32);
+let materials = [
+    new THREE.MeshBasicMaterial({ color: 0x8E2DE2 }),
+    new THREE.MeshBasicMaterial({ color: 0x4A00E0 })
+];
+
+for(let i=0; i<2; i++) {
+    let sphere = new THREE.Mesh(geometry, materials[i]);
+    sphere.position.y = i * 2.5;
     scene.add(sphere);
-    camera.position.z = 1;
-
-    document.addEventListener('mousemove', onDocumentMouseMove, false);
-    setInterval(changePhrase, 3000);
+    spheres.push(sphere);
 }
 
-function onDocumentMouseMove(event) {
-    mouseX = (event.clientX - windowHalfX) / 100;
-    mouseY = (event.clientY - windowHalfY) / 100;
-}
+// Orbit Controls
+controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-function changePhrase() {
-    gsap.to(textElement, { opacity: 0, duration: 0.5, onComplete: () => {
-        index = (index + 1) % phrases.length;
-        textElement.textContent = phrases[index];
-        gsap.to(textElement, { opacity: 1, duration: 0.5 });
-    }});
-}
-
+// Animation
 function animate() {
     requestAnimationFrame(animate);
-    sphere.rotation.x += 0.005;
-    sphere.rotation.y += 0.005;
-    
-    camera.position.x += (mouseX - camera.position.x) * 0.05;
-    camera.position.y += (-mouseY - camera.position.y) * 0.05;
-    camera.lookAt(scene.position);
-    
+
+    // Rotate Spheres
+    spheres.forEach(sphere => {
+        sphere.rotation.x += 0.005;
+        sphere.rotation.y += 0.005;
+    });
+
     renderer.render(scene, camera);
 }
+
+// Window Resize
+window.addEventListener('resize', () => {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+});
+
+animate();
+
 
