@@ -28,13 +28,15 @@ function animateColorDrop(x, y) {
     circle.classList.add("circle-animation");
     circle.style.background = gradients[currentWordIndex];
     circle.style.boxShadow = `0 0 10px ${gradients[currentWordIndex]}, 0 0 20px ${gradients[currentWordIndex]}, 0 0 30px ${gradients[currentWordIndex]}`;
+    circle.style.top = y + 'px';
+    circle.style.left = x + 'px';
     document.body.append(circle);
     anime({
         targets: circle,
-        top: y - 50,
-        left: x - 50,
-        width: '100vw',
-        height: '100vw',
+        top: '50%',
+        left: '50%',
+        width: '200vw',
+        height: '200vw',
         borderRadius: '50%',
         duration: 1500,
         easing: 'easeInOutQuad',
@@ -44,4 +46,5 @@ function animateColorDrop(x, y) {
     });
 }
 
+// Start the word change animation automatically
 changeWord();
