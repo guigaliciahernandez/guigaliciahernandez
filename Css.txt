@@ -1,157 +1,25 @@
 body {
     font-family: 'Roboto', sans-serif;
-    color: #333;
-    line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    font-size: 14px;
-}
-
-
-.container {
     display: flex;
-    flex-direction: column;
-    width: 75%;
-    max-width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    margin: 20px auto;
-    background-color: #ffffff;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-h2 {
-    font-size: 18px;
-    font-weight: bold;
-   
-}
-
-h4 {
-    font-size: 12px;
-    font-weight: bold;
-    
-}
-
-p, ul {
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-p {
-    line-height: 1.4; /* Change this value to your preferred line spacing */
-    
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-}
-
-ul li {
-    list-style: none;
-    margin-bottom: 8px;
-    
-}
-
-
-.separator {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    height: 1px;
-    background-color: #aaaaaa;
-    width: 100%;
-    clear: both;
-}
-
-
-
-#print-toggle, #dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     cursor: pointer;
+    transition: background-color 0.5s;
 }
 
-#dark-mode-toggle {
-    right: 170px;
+.container h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    text-align: center;
 }
 
-#print-toggle {
-    right: 90px;
-}
-
-.dark-mode {
-    background-color: #333;
-    color: #fff;
-}
-
-.dark-mode a {
-    color: #fff;
-}
-
-.dark-mode .container {
-    background-color: #333;
-}
-
-/* Two-column layout */
-.two-columns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-}
-
-.column {
-    flex: 1;
-    padding: 0 00px;
-    box-sizing: border-box;
-}
-
-/* Three-column layout */
-.three-columns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-}
-
-.three-columns .column {
-    flex: 1;
-    padding: 0 00px;
-    box-sizing: border-box;
-}
-
-@media print {
-    @page {
-        size: A4;
-        margin: 10mm;
-    }
-  
-    body {
-        font-size: 9px;
-    }
-
-
-    #dark-mode-toggle,
-    #print-toggle {
-        display: none;
-    }
-  
-    .container {
-        max-width: 100%;
-        width: 100%;
+@media (max-width: 600px) {
+    .container h1 {
+        font-size: 1.8em;
     }
 }
 
-br.custom-break {
-    display: block;
-    margin-bottom: 1px;
-}
