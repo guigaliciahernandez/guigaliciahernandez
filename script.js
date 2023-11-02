@@ -1,3 +1,7 @@
+const phrases = ["Innovation", "Design", "Creativity", "Excellence"];
+let index = 0;
+const textElement = document.getElementById("phrase");
+
 let scene, camera, renderer, sphere;
 let mouseX = 0, mouseY = 0;
 let windowHalfX = window.innerWidth / 2;
@@ -15,20 +19,27 @@ function init() {
     document.body.appendChild(renderer.domElement);
     
     let geometry = new THREE.SphereGeometry(0.5, 32, 32);
-    let loader = new THREE.TextureLoader();
-    loader.load('path_to_your_gradient_image.jpg', function(texture) {
-        let material = new THREE.MeshBasicMaterial({ map: texture });
-        sphere = new THREE.Mesh(geometry, material);
-        scene.add(sphere);
-        camera.position.z = 1;
-    });
+    let material = new THREE.MeshNormalMaterial();
     
+    sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+    camera.position.z = 1;
+
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+    setInterval(changePhrase, 3000);
 }
 
 function onDocumentMouseMove(event) {
     mouseX = (event.clientX - windowHalfX) / 100;
     mouseY = (event.clientY - windowHalfY) / 100;
+}
+
+function changePhrase() {
+    gsap.to(textElement, { opacity: 0, duration: 0.5, onComplete: () => {
+        index = (index + 1) % phrases.length;
+        textElement.textContent = phrases[index];
+        gsap.to(textElement, { opacity: 1, duration: 0.5 });
+    }});
 }
 
 function animate() {
