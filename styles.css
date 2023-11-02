@@ -1,20 +1,16 @@
 body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: white;
+    color: black;
+    overflow: hidden;
 }
 
-.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 5em;
+#dynamicWord {
+    font-size: 50px;
     cursor: pointer;
     transition: font-size 0.5s;
 }
@@ -22,6 +18,4 @@ body {
 .circle-animation {
     position: absolute;
     border-radius: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
 }
