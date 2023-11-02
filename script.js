@@ -1,4 +1,4 @@
-let words = ['EMBRACE ', 'CHANGE ', 'ENJOY THE RIDE ', '😊'];
+let words = ['EMBRACE 😊', 'CHANGE 😊', 'ENJOY THE RIDE 😊', '😊'];
 let scaleFactors = [1, 2, 3, 4];
 let colors = ['#5A24B4', '#D53CF5', '#3498db', '#e74c3c'];
 let currentWordIndex = 0;
