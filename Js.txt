@@ -1,22 +1,170 @@
-const phrases = ["Smile", "Have a great day", "The sun shines everyday"];
-const colorSchemes = [
-    { text: 'rgb(255,130,226)', background: 'rgb(0,18,168)', font: 'Nunito' },
-    { text: 'rgb(0,18,168)', background: 'rgb(255,130,226)', font: 'Montserrat' },
-    { text: 'rgb(255,255,255)', background: 'rgb(0,0,0)', font: 'Roboto' },
-];
+const darkModeToggle = document.getElementById("dark-mode-toggle");
 
-let currentPhraseIndex = 0;
-let currentColorIndex = 0;
+darkModeToggle.addEventListener("click", function () {
+  console.log("Dark mode button clicked");
+  
+  if (document.body.classList.contains("dark-mode")) {
+    document.body.classList.remove("dark-mode");
+    darkModeToggle.textContent = "PLAY COLORS";
+  } else {
+    document.body.classList.add("dark-mode");
+    darkModeToggle.textContent = "STOP COLOR";
+  }
+});
 
-function changePhraseAndStyle() {
-    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-    currentColorIndex = (currentColorIndex + 1) % colorSchemes.length;
-    
-    document.getElementById("positive-phrase").innerText = phrases[currentPhraseIndex];
-    document.body.style.backgroundColor = colorSchemes[currentColorIndex].background;
-    document.getElementById("positive-phrase").style.color = colorSchemes[currentColorIndex].text;
-    document.getElementById("positive-phrase").style.fontFamily = colorSchemes[currentColorIndex].font;
+
+document.getElementById("print-toggle").addEventListener("click", function () {
+  window.print();
+});
+
+function adjustMarginsForPrint() {
+  const container = document.querySelector(".container");
+  container.style.padding = "0";
+  container.style.margin = "0";
+  
+  // Add an event listener to restore padding after print
+  function restoreMargins() {
+    container.style.padding = "0px";
+    container.style.margin = "0px auto";
+    window.removeEventListener("afterprint", restoreMargins); // remove event listener
+  }
+  window.addEventListener("afterprint", restoreMargins);
 }
 
-document.body.addEventListener("click", changePhraseAndStyle);
+
+document.getElementById("print-toggle").addEventListener("click", function () {
+  adjustMarginsForPrint();
+  window.print();
+});
+
+let colorIndex = 0;
+const colorSchemes = [
+  { text: 'rgb(244,175,216)', background: 'rgb(254,49,197)', font: 'Archivo' },
+  { text: 'rgb(4,165,255)', background: 'rgb(0,18,168)', font: 'Source Code Pro' },
+  { text: 'rgb(255,130,226)', background: 'rgb(250,255,0)', font: 'Orbitron' },
+  { text: 'rgb(254,49,197)', background: 'rgb(95,1,76)', font: 'Great vibes' },
+  { text: 'rgb(254,49,197)', background: 'rgb(0,18,168)', font: 'Lato' },
+  { text: 'rgb(102,48,255)', background: 'rgb(159,249,68)', font: 'Raleway' },
+  { text: 'rgb(250,255,0)', background: 'rgb(51,70,255)', font: 'Alfa Slab One' },
+  { text: 'rgb(4,165,255)', background: 'rgb(255,116,21)', font: 'Cinzel' },
+  { text: 'rgb(250, 255, 0)', background: 'rgb(144,40,143)', font: 'Quicksand' },
+  { text: 'rgb(254,49,197)', background: 'rgb(8,164,255)', font: 'Roboto Slab' },
+  { text: 'rgb(255,116,21)', background: 'rgb(102,48,255)', font: 'Playfair+Display' },
+  { text: 'rgb(0,0,0)', background: 'rgb(255,255,255)', font: 'Poppins' },
+  { text: 'rgb(255,255,255)', background: 'rgb(0,0,0)', font: 'Roboto Slab' },
+];
+
+function updateColorScheme() {
+  document.body.style.color = colorSchemes[colorIndex].text;
+  document.body.style.backgroundColor = colorSchemes[colorIndex].background;
+  document.body.style.fontFamily = colorSchemes[colorIndex].font;
+  colorIndex = (colorIndex + 1) % colorSchemes.length;
+}
+
+// Add a function to check if dark mode is enabled
+function isDarkModeEnabled() {
+  return document.body.classList.contains("dark-mode");
+}
+
+function animateColorDrop(x, y) {
+  if (isDarkModeEnabled()) {
+    const circle = document.createElement("div");
+    circle.style.position = "fixed";
+    circle.style.width = "0";
+    circle.style.height = "0";
+    circle.style.borderRadius = "50%";
+    circle.style.zIndex = "-1";
+    document.body.appendChild(circle);
+
+    x = x || Math.floor(Math.random() * window.innerWidth);
+    y = y || Math.floor(Math.random() * window.innerHeight);
+    circle.style.left = x + "px";
+    circle.style.top = y + "px";
+
+    // Add stronger glow effect
+    circle.style.boxShadow = "0 0 100px 30px " + colorSchemes[colorIndex].text;
+
+    const maxDimension = Math.max(
+      document.documentElement.clientWidth,
+      document.documentElement.clientHeight
+    );
+    const animationDuration = 1200;
+
+    const textElements = document.querySelectorAll(
+      "h1, h2, h3, h4, h5, h6, p, li, a, .separator"
+    );
+
+    function changeSeparatorColor() {
+      const separators = document.querySelectorAll('.separator');
+      separators.forEach(separator => {
+        separator.style.backgroundColor = colorSchemes[colorIndex].text;
+      });
+    }
+
+    anime({
+      targets: circle,
+      width: [0, maxDimension * 2],
+      height: [0, maxDimension * 2],
+      left: [x + "px", x - maxDimension + "px"],
+      top: [y + "px", y - maxDimension + "px"],
+      backgroundColor: [
+        colorSchemes[colorIndex].background,
+        colorSchemes[colorIndex].background
+      ],
+      // Animate boxShadow property
+      boxShadow: [
+        "0 0 100px 30px " + colorSchemes[colorIndex].text,
+        "0 0 100px 30px " + colorSchemes[colorIndex].text
+      ],
+      duration: animationDuration,
+      easing: "easeInOutQuad",
+      begin: () => {
+        document.body.style.color = colorSchemes[colorIndex].text;
+        circle.style.backgroundColor = colorSchemes[colorIndex].background;
+        // Add stronger glow effect
+        circle.style.boxShadow = "0 0 100px 30px " + colorSchemes[colorIndex].text;
+        changeSeparatorColor();
+      },
+      
+      update: (anim) => {
+        // Get the position and dimensions of the circle
+        const circleRect = circle.getBoundingClientRect();
+
+        // Get all the text elements and check if they intersect with the circle
+        const textElements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, li, a, .separator");
+        textElements.forEach(element => {
+          const elementRect = element.getBoundingClientRect();
+          if (rectsIntersect(circleRect, elementRect)) {
+            // Change the color and font family of the intersecting element
+            element.style.color = colorSchemes[colorIndex].text;
+            element.style.fontFamily = colorSchemes[colorIndex].font;
+          }
+        });
+      },
+      complete: () => {
+        document.body.style.backgroundColor = colorSchemes[colorIndex].background;
+        document.body.style.fontFamily = colorSchemes[colorIndex].font;
+        colorIndex = (colorIndex + 1) % colorSchemes.length;
+        document.body.removeChild(circle);
+      },
+    });
+  }
+}
+
+
+
+function rectsIntersect(rect1, rect2) {
+  return !(rect2.left > rect1.right ||
+           rect2.right < rect1.left ||
+           rect2.top > rect1.bottom ||
+           rect2.bottom < rect1.top);
+}
+
+// Set the interval for the automatic color change
+setInterval(() => animateColorDrop(), 1300);
+
+// Add an event listener for clicks
+document.addEventListener("click", (event) => {
+  animateColorDrop(event.clientX, event.clientY);
+});
 
