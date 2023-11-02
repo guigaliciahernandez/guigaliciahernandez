@@ -1,4 +1,4 @@
-let words = ['EMBRACE', 'CHANGE', 'ENJOY THE RIDE :)'];
+let words = ['EMBRACE :)', 'CHANGE :)', 'ENJOY THE RIDE :)'];
 let gradients = [
     "linear-gradient(90deg, #FF0066, #FF66FF)",
     "linear-gradient(90deg, #FF6600, #FFCC00)",
