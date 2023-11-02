@@ -1,12 +1,12 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: 'Arial', sans-serif; /* Using Arial as a widely available font. Consider using San Francisco or a similar font for a closer Apple feel. */
+    font-family: 'Arial', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(60deg, #141E30, #243B55);
+    background: linear-gradient(60deg, #414345, #232526); /* Adjust this gradient to a tech-inspired one */
     animation: gradientWave 6s infinite alternate;
 }
 
@@ -22,27 +22,18 @@ body {
 #word {
     font-size: 50px;
     cursor: pointer;
-    color: #00FFFF; /* Initial color, we will change this dynamically with JS */
-    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
+    background: linear-gradient(45deg, #7DF9FF, #FF4500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px #7DF9FF, 0 0 20px #FF4500;
     user-select: none;
 }
 
 .circle-animation {
     position: absolute;
-    background: rgba(0, 255, 255, 0.2); /* Initial color, we will change this dynamically with JS */
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    animation: waveEffect 2s infinite alternate;
-    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
-}
-
-@keyframes waveEffect {
-    0% {
-        transform: scaleY(1);
-    }
-    50% {
-        transform: scaleY(1.05);
-    }
-    100% {
-        transform: scaleY(1);
-    }
+    background: rgba(0, 255, 255, 0.1);  /* Adding transparency here */
+    pointer-events: none;
 }
