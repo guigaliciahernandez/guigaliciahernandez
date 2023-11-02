@@ -1,26 +1,47 @@
 body {
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
     margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
     overflow: hidden;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    animation: gradientWave 10s infinite alternate;
 }
 
-.word {
+@keyframes gradientWave {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+#word {
     font-size: 50px;
     cursor: pointer;
-    background: -webkit-linear-gradient(white, black);
-    -webkit-background-clip: text;
-    color: transparent;
-    transition: font-size 0.8s ease;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    user-select: none;
 }
 
 .circle-animation {
     position: absolute;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
-    opacity: 0.5;
-    pointer-events: none;
+    animation: waveEffect 4s infinite alternate;
+}
+
+@keyframes waveEffect {
+    0% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(1.05);
+    }
+    100% {
+        transform: scaleY(1);
+    }
 }
