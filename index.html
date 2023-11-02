@@ -3,13 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Liquid Word Transition</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .centered {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5em;
+            cursor: pointer;
+            transition: font-size 0.5s;
+        }
+    </style>
 </head>
 <body>
-    <div id="liquidWord" class="centered"></div>
+    <div id="liquidWord" class="centered">EMBRACE</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        let liquidWord = document.getElementById('liquidWord');
+        liquidWord.addEventListener('click', function() {
+            this.style.transform = "scale(1.5)";
+            setTimeout(() => {
+                this.style.transform = "scale(1)";
+            }, 200);
+        });
+    </script>
 </body>
 </html>
-
