@@ -5,14 +5,12 @@ let gradients = [
     "linear-gradient(90deg, #66FF66, #00FF66)"
 ];
 let currentWordIndex = 0;
+let wordElement = document.getElementById('word');
 
-document.getElementById('word').addEventListener('click', function() {
-    changeWord();
-});
+setInterval(changeWord, 5000);
 
 function changeWord() {
     currentWordIndex = (currentWordIndex + 1) % words.length;
-    let wordElement = document.getElementById('word');
     wordElement.innerHTML = words[currentWordIndex];
     wordElement.style.backgroundImage = gradients[currentWordIndex];
 }
