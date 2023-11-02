@@ -1,7 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Arial', sans-serif; /* Using Arial as a widely available font. Consider using San Francisco or a similar font for a closer Apple feel. */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,14 +22,14 @@ body {
 #word {
     font-size: 50px;
     cursor: pointer;
-    color: #00FFFF;
+    color: #00FFFF; /* Initial color, we will change this dynamically with JS */
     text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
     user-select: none;
 }
 
 .circle-animation {
     position: absolute;
-    background: rgba(0, 255, 255, 0.2);
+    background: rgba(0, 255, 255, 0.2); /* Initial color, we will change this dynamically with JS */
     border-radius: 50%;
     animation: waveEffect 2s infinite alternate;
     box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
