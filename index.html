@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Positive Vibes</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Nunito&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Click for Smile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s;
+        }
+
+        #smileWord {
+            font-size: 5em;
+            cursor: pointer;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1 id="positive-phrase">Smile</h1>
-    </div>
-    <script src="scripts.js"></script>
-</body>
 
+<div id="smileWord">Smile</div>
+
+<script>
+    let words = ['Happy', 'Joy', 'Laugh', 'Cheerful', 'Delight'];
+    let colors = ['#FF5733', '#33FF57', '#5733FF', '#FF33F1', '#33FFF1'];
+
+    document.getElementById('smileWord').addEventListener('click', function() {
+        let randomIndex = Math.floor(Math.random() * words.length);
+        this.innerHTML = words[randomIndex];
+        document.body.style.backgroundColor = colors[randomIndex];
+    });
+</script>
+
+</body>
 </html>
