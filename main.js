@@ -1,81 +1,50 @@
-let scene, camera, renderer, spheres, raycaster, mouse;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 5;
 
-init();
-animate();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-function init() {
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+const bubbleGeometry = new THREE.SphereGeometry(1, 32, 32);
+const bubbleMaterial = new THREE.MeshBasicMaterial({ color: 0x8844aa, transparent: true, opacity: 0.8 });
 
-    raycaster = new THREE.Raycaster();
-    mouse = new THREE.Vector2();
-
-    spheres = [];
-    const geometry = new THREE.SphereGeometry(1, 32, 32);
-    const vertexShader = `
-        varying vec3 vUv;
-        void main() {
-            vUv = position; 
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-        }`;
-    const fragmentShader = `
-        varying vec3 vUv;
-        void main() {
-            float gradient = dot(normalize(vUv), vec3(0.0, 0.0, 1.0));
-            gl_FragColor = vec4(vec3(0.5 + 0.5 * gradient), 0.6);
-        }`;
-    const material = new THREE.ShaderMaterial({
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
-        blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
-        transparent: true
-    });
-
-    for (let i = 0; i < 5; i++) {
-        const sphere = new THREE.Mesh(geometry, material);
-        sphere.scale.set(1 + i * 0.5, 1 + i * 0.5, 1 + i * 0.5);
-        spheres.push(sphere);
-        scene.add(sphere);
-    }
-
-    camera.position.z = 6;
-
-    window.addEventListener('resize', onWindowResize, false);
-    window.addEventListener('click', onClick, false);
+const bubbles = [];
+for (let i = 0; i < 10; i++) {
+    const bubble = new THREE.Mesh(bubbleGeometry, bubbleMaterial);
+    bubble.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+    bubble.velocity = new THREE.Vector3(Math.random() * 0.02 - 0.01, Math.random() * 0.02 - 0.01, 0);
+    bubbles.push(bubble);
+    scene.add(bubble);
 }
 
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
-function onClick(event) {
-    event.preventDefault();
+document.addEventListener('mousemove', onMouseMove, false);
+function onMouseMove(event) {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    raycaster.setFromCamera(mouse, camera);
-
-    const intersects = raycaster.intersectObjects(spheres);
-
-    if (intersects.length > 0) {
-        gsap.to(intersects[0].object.scale, {
-            x: intersects[0].object.scale.x + 0.5,
-            y: intersects[0].object.scale.y + 0.5,
-            z: intersects[0].object.scale.z + 0.5,
-            duration: 0.5,
-            yoyo: true,
-            repeat: 1
-        });
-    }
 }
 
 function animate() {
     requestAnimationFrame(animate);
+
+    for (const bubble of bubbles) {
+        bubble.position.add(bubble.velocity);
+        if (bubble.position.y > 5 || bubble.position.y < -5) bubble.velocity.y = -bubble.velocity.y;
+        if (bubble.position.x > 5 || bubble.position.x < -5) bubble.velocity.x = -bubble.velocity.x;
+    }
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(bubbles);
+    if (intersects.length > 0) {
+        document.getElementById('info').style.display = 'block';
+    } else {
+        document.getElementById('info').style.display = 'none';
+    }
+
     renderer.render(scene, camera);
 }
+animate();
+
