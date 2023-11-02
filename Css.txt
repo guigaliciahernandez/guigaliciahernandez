@@ -1,25 +1,387 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', sans-serif;
+    color: #000000;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-size: 12px;
+    transition: color 1s ease-in-out; /* Add this line */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'poppins', sans-serif;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: bold;
+    
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+   
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: bold;
+   
+}
+
+h4 {
+    font-size: 12px;
+    font-weight: bold;
+    
+}
+
+a {
+    color: #0000EE; /* You can change this color to your preferred link color */
+    text-decoration: underline; /* You can also use "none" if you don't want an underline */
     cursor: pointer;
-    transition: background-color 0.5s;
 }
 
-.container h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em;
-    text-align: center;
+a:hover {
+    color: #551A8B; /* You can change this color to your preferred link hover color */
+    text-decoration: underline; /* You can also use "none" if you don't want an underline on hover */
 }
 
-@media (max-width: 600px) {
-    .container h1 {
-        font-size: 1.8em;
+
+p, ul {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+p {
+    line-height: 1.6; /* Change this value to your preferred line spacing */
+    
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    list-style: none;
+    margin-bottom: 8px;
+    
+}
+
+.separator {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    height: .5px;
+    background-color: hsl(0, 0%, 0%);
+    width: 100%;
+    clear: both;
+    
+}
+
+.button-container {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    z-index: 1000;
+}
+
+#print-toggle, #dark-mode-toggle {
+    border-radius: 10px;
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 15px;
+    border: 5px white;
+    cursor: pointer;
+    background-color: black;
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        flex-direction: column;
+    }
+    
+    #print-toggle, #dark-mode-toggle {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    #print-toggle {
+        display: none; /* Hide the print button on mobile devices */
     }
 }
 
+.content-container {
+    margin-top: 30px;
+    position: relative;
+    z-index: -1;
+}
+
+
+
+#dark-mode-toggle span {
+    animation-name: play-animation;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+  @keyframes play-animation {
+    0% {
+      color: red;
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px orange, 0 0 25px orange, 0 0 30px orange, 0 0 35px yellow, 0 0 40px yellow, 0 0 45px yellow;
+    }
+  
+    25% {
+      color: blue;
+      text-shadow: 0 0 5px blue, 0 0 10px blue, 0 0 15px blue, 0 0 20px purple, 0 0 25px purple, 0 0 30px purple, 0 0 35px pink, 0 0 40px pink, 0 0 45px pink;
+    }
+  
+    50% {
+      color: green;
+      text-shadow: 0 0 5px green, 0 0 10px green, 0 0 15px green, 0 0 20px turquoise, 0 0 25px turquoise, 0 0 30px turquoise, 0 0 35px lightgreen, 0 0 40px lightgreen, 0 0 45px lightgreen;
+    }
+  
+    75% {
+      color: yellow;
+      text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 15px yellow, 0 0 20px orange, 0 0 25px orange, 0 0 30px orange, 0 0 35px red, 0 0 40px red, 0 0 45px red;
+    }
+  
+    100% {
+      color: red;
+      text-shadow: 0 0 5px red, 0 0 10px red, 0 0 15px red, 0 0 20px orange, 0 0 25px orange, 0 0 30px orange, 0 0 35px yellow, 0 0 40px yellow, 0 0 45px yellow;
+    }
+  }
+  
+
+#print-toggle {
+    right: 90px;
+    margin-left: 10px;
+}
+
+.dark-mode {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+   
+}
+
+.dark-mode a {
+    color: #fff;
+}
+
+.dark-mode .container {
+    background-color: transparent;
+   
+}
+
+/* Two-column layout */
+.two-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.column {
+    flex: 1;
+    padding: 0 00px;
+    box-sizing: border-box;
+}
+
+/* Three-column layout */
+.three-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.three-columns .column {
+    flex: 1;
+    padding: 0 00px;
+    box-sizing: border-box;
+}
+
+@media print {
+    .container {
+        padding: 0;
+      }
+    @page {
+        size: A4;
+        margin: 0mm;
+    }
+
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+       
+    }
+    
+    h2 {
+        font-size: 14px;
+        font-weight: bold;
+       
+    }
+
+    h4 {
+        font-size: 10px;
+        font-weight: bold;
+        
+    }
+
+    body {
+        font-size: 9px;
+        line-height: 1.4; 
+    }
+
+
+    #dark-mode-toggle,
+    #print-toggle {
+        display: none;
+    }
+  
+    .separator {
+        height: .25px;
+        background-color: black;
+      }
+
+    .container {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+br.custom-break {
+    display: block;
+    margin-bottom: 1px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 100%;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 20px auto;
+    background-color: transparent;
+
+}
+
+
+.content-container {
+    position: relative;
+
+}
+
+.circle {
+    position: absolute;
+    pointer-events: none;
+
+}
+.color-scheme-1 {
+    background-color: rgb(254,49,197);
+    color: rgb(244,175,216);
+    font-family: 'Archivo', sans-serif;
+}
+
+.color-scheme-2 {
+    background-color: rgb(0,18,168);
+    color: rgb(4,165,255);
+    font-family: 'Source Code Pro', sans-serif;
+}
+
+.color-scheme-3 {
+    background-color: rgb(250,255,0);
+    color: rgb(255,130,226);
+    font-family: 'Orbitron', serif;
+}
+
+.color-scheme-4 {
+    background-color: rgb(95,1,76);
+    color: rgb(254,49,197);
+    font-family: 'Great Vibes', sans-serif;
+}
+
+.color-scheme-5 {
+    background-color: rgb(0,18,168);
+    color: rgb(254,49,197);
+    font-family: 'Lato', sans-serif;
+}
+.color-scheme-6 {
+    background-color:rgb(159,249,68);
+    color:rgb(102,48,255);
+    font-family: 'Raleway', serif;
+}
+
+
+.color-scheme-7 {
+    background-color: rgb(51,70,255);
+    color: rgb(250,255,0);
+    font-family: 'Alfa Slab One', sans-serif;
+}
+
+.color-scheme-8 {
+    background-color: rgb(255,116,21);
+    color: rgb(4,165,255);
+    font-family: 'Cinzel', sans-serif;
+}
+
+.color-scheme-9 {
+    background-color: rgb(144,40,143);
+    color: rgb(250, 255, 0);
+    font-family: 'Quicksand', serif;
+}
+
+.color-scheme-10 {
+    background-color: rgb(8,164,255);
+    color: rgb(254,49,197);
+    font-family: 'Roboto Slab', serif;
+}
+.color-scheme-11 {
+    background-color: rgb(102,48,255);
+    color: rgb(255,116,21);
+    font-family: 'Playfair+Display', serif;
+}
+.color-scheme-12 {
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: 'Poppins', serif;
+}
+.color-scheme-13 {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-family: 'Roboto Slab', serif;
+}
+
+
+
+.background-effect {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    mix-blend-mode: difference;
+    transition: opacity 1s ease-in-out;
+    z-index: -1; 
+  }
+  
+  .normal-mode {
+    backdrop-filter: none;
+    opacity: 1;
+}
+
+#dark-mode-toggle.normal-mode:hover,
+#print-toggle.normal-mode:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.spacing {
+    margin-bottom: 30px;
+}
+
+
+  
