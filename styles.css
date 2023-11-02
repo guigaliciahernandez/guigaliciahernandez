@@ -17,14 +17,31 @@ body {
     width: 100%;
     height: 100%;
     background: radial-gradient(ellipse at center, rgba(128,0,128,0.5) 0%, rgba(0,0,0,1) 100%);
-    z-index: -1;
-    animation: pulse 10s infinite;
 }
 
-@keyframes pulse {
-    0% { background-size: 100% 100%; }
-    50% { background-size: 105% 105%; }
-    100% { background-size: 100% 100%; }
+.circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255,0,255,0.5) 0%, transparent 100%);
+    animation: expand 10s infinite;
+}
+
+@keyframes expand {
+    0%, 100% {
+        width: 200px;
+        height: 200px;
+        opacity: 1;
+    }
+    50% {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
 }
 
 #word {
@@ -35,5 +52,16 @@ body {
     background-image: linear-gradient(90deg, #FF0066, #FF66FF);
     -webkit-background-clip: text;
     z-index: 1;
+    animation: wordGrow 10s infinite;
 }
+
+@keyframes wordGrow {
+    0%, 100% {
+        font-size: 50px;
+    }
+    50% {
+        font-size: 55px;
+    }
+}
+
 
