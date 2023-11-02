@@ -5,18 +5,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.5s, font-family 0.5s;
+    transition: background-color 1s, font-family 1s;
 }
 
-#smileWord {
+#liquidWord {
     font-size: 5em;
     cursor: pointer;
-    transition: transform 0.2s, opacity 0.2s;
-}
-
-.circle-animation {
-    position: fixed;
-    border-radius: 50%;
-    z-index: -1;
-    box-shadow: 0 0 100px 30px white;
+    transition: transform 0.5s, opacity 0.5s;
 }
