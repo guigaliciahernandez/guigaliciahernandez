@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page Animation</title>
+    <title>Lava Lamp Bubbles</title>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
+        body { margin: 0; overflow: hidden; }
+        #info { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24px; display: none; color: white; text-align: center; }
     </style>
 </head>
 <body>
     <script src="https://threejs.org/build/three.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <div id="info">Something Positive</div>
     <script src="app.js"></script>
 </body>
 </html>
