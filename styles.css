@@ -1,13 +1,13 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(60deg, #29323c 0%, #485563 100%);
-    animation: gradientWave 10s infinite alternate;
+    background: linear-gradient(60deg, #141E30, #243B55);
+    animation: gradientWave 6s infinite alternate;
 }
 
 @keyframes gradientWave {
@@ -22,16 +22,17 @@ body {
 #word {
     font-size: 50px;
     cursor: pointer;
-    color: white;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
     user-select: none;
 }
 
 .circle-animation {
     position: absolute;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 255, 255, 0.2);
     border-radius: 50%;
-    animation: waveEffect 4s infinite alternate;
+    animation: waveEffect 2s infinite alternate;
+    box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF;
 }
 
 @keyframes waveEffect {
