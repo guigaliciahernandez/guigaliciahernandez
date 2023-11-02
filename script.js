@@ -1,6 +1,12 @@
-let words = ['EMBRACE 😊', 'CHANGE 😊', 'ENJOY THE RIDE 😊', '😊'];
-let scaleFactors = [1, 2, 3, 4];
-let colors = ['#5A24B4', '#D53CF5', '#3498db', '#e74c3c'];
+let words = ['EMBRACE 😊', 'CHANGE 😊', 'ENJOY', 'THE', 'RIDE 😊', '😊'];
+let gradients = [
+    'linear-gradient(45deg, #7DF9FF, #FF4500)',
+    'linear-gradient(45deg, #FFD700, #7FFF00)',
+    'linear-gradient(45deg, #00BFFF, #FFC0CB)',
+    'linear-gradient(45deg, #FF4500, #00BFFF)',
+    'linear-gradient(45deg, #7DF9FF, #FFD700)',
+    'linear-gradient(45deg, #7FFF00, #FFC0CB)'
+];
 let currentWordIndex = 0;
 
 document.getElementById('word').addEventListener('click', function() {
@@ -11,40 +17,30 @@ document.getElementById('word').addEventListener('click', function() {
 function changeWord() {
     currentWordIndex = (currentWordIndex + 1) % words.length;
     document.getElementById('word').innerHTML = words[currentWordIndex];
-    document.getElementById('word').style.fontSize = `${50 * scaleFactors[currentWordIndex]}px`;
-    document.getElementById('word').style.color = colors[currentWordIndex];
-    document.getElementById('word').style.textShadow = `0 0 10px ${colors[currentWordIndex]}, 0 0 20px ${colors[currentWordIndex]}, 0 0 30px ${colors[currentWordIndex]}`;
+    document.getElementById('word').style.background = gradients[currentWordIndex];
+    document.getElementById('word').style.textShadow = `0 0 10px ${gradients[currentWordIndex]}, 0 0 20px ${gradients[currentWordIndex]}, 0 0 30px ${gradients[currentWordIndex]}`;
 }
 
 function animateColorDrop(x, y) {
     const circle = document.createElement("div");
     circle.classList.add("circle-animation");
-    circle.style.background = colors[currentWordIndex];
-    circle.style.boxShadow = `0 0 10px ${colors[currentWordIndex]}, 0 0 20px ${colors[currentWordIndex]}, 0 0 30px ${colors[currentWordIndex]}`;
-    document.body.appendChild(circle);
-
-    const maxDimension = Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
-    const animationDuration = 600;
-
+    circle.style.background = gradients[currentWordIndex];
+    circle.style.boxShadow = `0 0 10px ${gradients[currentWordIndex]}, 0 0 20px ${gradients[currentWordIndex]}, 0 0 30px ${gradients[currentWordIndex]}`;
+    document.body.append(circle);
     anime({
         targets: circle,
-        width: [0, maxDimension * 2],
-        height: [0, maxDimension * 2],
-        left: [x + "px", x - maxDimension + "px"],
-        top: [y + "px", y - maxDimension + "px"],
-        duration: animationDuration,
-        easing: "easeInOutQuad",
-        complete: () => {
-            document.body.removeChild(circle);
+        top: y - 50,
+        left: x - 50,
+        width: '100vw',
+        height: '100vw',
+        borderRadius: '50%',
+        duration: 1500,
+        easing: 'easeInOutQuad',
+        complete: function() {
+            circle.remove();
         }
     });
 }
 
-function initAnimation() {
-    setInterval(() => {
-        changeWord();
-        animateColorDrop();
-    }, 1500);
-}
-
-initAnimation(); // This will start the animation when the page is loaded
+// Automatically change words at an interval
+setInterval(changeWord, 800);
