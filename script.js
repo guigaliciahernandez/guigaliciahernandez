@@ -3,16 +3,15 @@ let scaleFactors = [1, 2, 3];
 let currentWordIndex = 0;
 
 document.getElementById('word').addEventListener('click', function() {
-    // Increment the index for the next word
-    currentWordIndex = (currentWordIndex + 1) % words.length;
-    
-    // Set the word and its size
-    this.innerHTML = words[currentWordIndex];
-    this.style.fontSize = `${50 * scaleFactors[currentWordIndex]}px`;
-    
-    // Call the animation
+    changeWord();
     animateColorDrop(window.innerWidth / 2, window.innerHeight / 2);
 });
+
+function changeWord() {
+    currentWordIndex = (currentWordIndex + 1) % words.length;
+    document.getElementById('word').innerHTML = words[currentWordIndex];
+    document.getElementById('word').style.fontSize = `${50 * scaleFactors[currentWordIndex]}px`;
+}
 
 function animateColorDrop(x, y) {
     const circle = document.createElement("div");
@@ -36,7 +35,9 @@ function animateColorDrop(x, y) {
     });
 }
 
-setInterval(() => {
-    animateColorDrop();
-}, 2000);
-
+function initAnimation() {
+    setInterval(() => {
+        changeWord();
+        animateColorDrop();
+    }, 2000);
+}
