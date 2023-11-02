@@ -6,27 +6,18 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(60deg, #414345, #232526); /* Adjust this gradient to a tech-inspired one */
+    background: linear-gradient(60deg, #414345, #232526);
+    background-size: 200% 200%;
     animation: gradientWave 6s infinite alternate;
 }
 
 @keyframes gradientWave {
     0% {
-        background-position: 0% 50%;
+        background-position: 100% 0%;
     }
     100% {
-        background-position: 100% 50%;
+        background-position: 0% 100%;
     }
-}
-
-#word {
-    font-size: 50px;
-    cursor: pointer;
-    background: linear-gradient(45deg, #7DF9FF, #FF4500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px #7DF9FF, 0 0 20px #FF4500;
-    user-select: none;
 }
 
 .circle-animation {
@@ -34,6 +25,13 @@ body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: rgba(0, 255, 255, 0.1);  /* Adding transparency here */
     pointer-events: none;
+    z-index: 10;
+}
+
+#animated-text {
+    font-size: 4rem;
+    font-weight: bold;
+    color: transparent;
+    background-clip: text;
 }
