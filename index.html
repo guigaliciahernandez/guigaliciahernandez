@@ -3,60 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquid Word Transition</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: white;
-        }
-        #liquidWord {
-            font-size: 5em;
-            opacity: 0;
-        }
-    </style>
+    <title>Dynamic Words Animation</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="liquidWord">EMBRACE</div>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-    <script>
-        function animateWord() {
-            anime.timeline({
-                loop: true
-            })
-            .add({
-                targets: '#liquidWord',
-                opacity: 1,
-                duration: 1000,
-                easing: 'easeOutExpo',
-                complete: function(anim) {
-                    setTimeout(changeWord, 1000);
-                }
-            })
-            .add({
-                targets: '#liquidWord',
-                opacity: 0,
-                duration: 1000,
-                easing: 'easeOutExpo',
-                delay: 2000
-            });
-        }
-
-        function changeWord() {
-            const words = ['EMBRACE', 'CHANGE', 'LIFE'];
-            const currentWord = document.getElementById('liquidWord').innerText;
-            const currentIndex = words.indexOf(currentWord);
-            const nextIndex = (currentIndex + 1) % words.length;
-            document.getElementById('liquidWord').innerText = words[nextIndex];
-        }
-
-        animateWord();
-    </script>
+    <h1 id="dynamicWord">EMBRACE</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
+
