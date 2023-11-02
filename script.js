@@ -1,4 +1,4 @@
-let words = ['EMBRACE', 'CHANGE', 'ENJOY THE RIDE'];
+let words = ['EMBRACE', 'CHANGE', 'ENJOY THE RIDE', '😊'];
 let scaleFactors = [1, 2, 3];
 let currentWordIndex = 0;
 
@@ -19,7 +19,7 @@ function animateColorDrop(x, y) {
     document.body.appendChild(circle);
 
     const maxDimension = Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
-    const animationDuration = 800;
+    const animationDuration = 600;
 
     anime({
         targets: circle,
@@ -39,5 +39,5 @@ function initAnimation() {
     setInterval(() => {
         changeWord();
         animateColorDrop();
-    }, 2000);
+    }, 1500);
 }
