@@ -1,24 +1,21 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    cursor: pointer;
-    transition: background-color 0.5s;
+const phrases = ["Smile", "Have a great day", "The sun shines everyday"];
+const colorSchemes = [
+    { text: 'rgb(255,130,226)', background: 'rgb(0,18,168)', font: 'Nunito' },
+    { text: 'rgb(0,18,168)', background: 'rgb(255,130,226)', font: 'Montserrat' },
+    { text: 'rgb(255,255,255)', background: 'rgb(0,0,0)', font: 'Roboto' },
+];
+
+let currentPhraseIndex = 0;
+let currentColorIndex = 0;
+
+function changePhraseAndStyle() {
+    currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+    currentColorIndex = (currentColorIndex + 1) % colorSchemes.length;
+    
+    document.getElementById("positive-phrase").innerText = phrases[currentPhraseIndex];
+    document.body.style.backgroundColor = colorSchemes[currentColorIndex].background;
+    document.getElementById("positive-phrase").style.color = colorSchemes[currentColorIndex].text;
+    document.getElementById("positive-phrase").style.fontFamily = colorSchemes[currentColorIndex].font;
 }
 
-.container h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5em;
-    text-align: center;
-}
-
-@media (max-width: 600px) {
-    .container h1 {
-        font-size: 1.8em;
-    }
-}
+document.body.addEventListener("click", changePhraseAndStyle);
