@@ -1,23 +1,26 @@
-let words = ['EMBRACE', 'LIVE', 'LOVE', 'SMILE', 'BELIEVE'];
+let words = ['EMBRACE', 'CHANGE', 'ENJOY THE RIDE'];
+let scaleFactors = [1, 2, 3];
+
 let colorSchemes = [
     {background: '#FF5733', text: 'white'},
-    {background: '#33FF57', text: 'white'},
-    {background: '#5733FF', text: 'white'},
-    {background: '#FF33F1', text: 'white'},
-    {background: '#33FFF1', text: 'white'},
+    {background: '#33FF57', text: 'black'},
+    {background: '#5733FF', text: 'white'}
 ];
 
-let currentWordIndex = 0;
+let colorIndex = 0;
+
+document.getElementById('word').addEventListener('click', function() {
+    colorIndex = (colorIndex + 1) % words.length;
+    this.innerHTML = words[colorIndex];
+    this.style.fontSize = `${50 * scaleFactors[colorIndex]}px`;
+    animateColorDrop(window.innerWidth / 2, window.innerHeight / 2);
+});
 
 function animateColorDrop(x, y) {
     const circle = document.createElement("div");
     circle.classList.add("circle-animation");
+    circle.style.backgroundColor = colorSchemes[colorIndex].background;
     document.body.appendChild(circle);
-
-    x = x || Math.floor(Math.random() * window.innerWidth);
-    y = y || Math.floor(Math.random() * window.innerHeight);
-    circle.style.left = x + "px";
-    circle.style.top = y + "px";
 
     const maxDimension = Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
     const animationDuration = 800;
@@ -31,23 +34,20 @@ function animateColorDrop(x, y) {
         duration: animationDuration,
         easing: "easeInOutQuad",
         begin: () => {
-            document.getElementById('dynamicWord').innerText = words[currentWordIndex];
-            document.getElementById('dynamicWord').style.fontSize = 50 + (currentWordIndex * 20) + "px";
-            document.body.style.color = colorSchemes[currentWordIndex].text;
-            circle.style.backgroundColor = colorSchemes[currentWordIndex].background;
+            document.body.style.color = colorSchemes[colorIndex].text;
+            circle.style.backgroundColor = colorSchemes[colorIndex].background;
         },
         complete: () => {
-            document.body.style.backgroundColor = colorSchemes[currentWordIndex].background;
+            document.body.style.backgroundColor = colorSchemes[colorIndex].background;
             document.body.removeChild(circle);
-            currentWordIndex = (currentWordIndex + 1) % words.length;
         }
     });
 }
 
-// Automatic Animation Every 2 seconds
 setInterval(() => {
     animateColorDrop();
 }, 2000);
+
 
 // Animation on Body Click
 document.body.addEventListener("click", (event) => {
