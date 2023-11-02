@@ -1,21 +1,26 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: white;
-    color: black;
+    background-color: #ffffff;
     overflow: hidden;
 }
 
-#dynamicWord {
+.word {
     font-size: 50px;
     cursor: pointer;
-    transition: font-size 0.5s;
+    background: -webkit-linear-gradient(white, black);
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: font-size 0.8s ease;
 }
 
 .circle-animation {
     position: absolute;
     border-radius: 50%;
+    opacity: 0.5;
+    pointer-events: none;
 }
