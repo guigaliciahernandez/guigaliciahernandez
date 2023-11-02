@@ -1,46 +1,40 @@
 body {
     margin: 0;
     overflow: hidden;
-    font-family: 'San Francisco', sans-serif; /* Closer to Apple's typography. */
+    font-family: 'Arial', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(60deg, #141E30, #243B55);
-    animation: gradientWave 6s infinite alternate;
-}
-
-@keyframes gradientWave {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+    background: url('path_to_your_image.jpg') center center no-repeat;
+    background-size: cover;
 }
 
 #word {
     font-size: 50px;
     cursor: pointer;
     user-select: none;
-    transition: font-size 0.5s, background-image 0.5s, color 0.5s; /* Adding transition for smooth change */
+    color: transparent;
+    background-image: linear-gradient(90deg, #FF0066, #FF66FF);
+    -webkit-background-clip: text;
 }
-
 
 .circle-animation {
     position: absolute;
+    background: rgba(255, 255, 255, 0.1); 
     border-radius: 50%;
-    animation: waveEffect 2s infinite alternate;
+    animation: waveEffect 4s infinite alternate;
 }
 
 @keyframes waveEffect {
     0% {
-        transform: scaleY(1);
+        transform: scale(1);
     }
     50% {
-        transform: scaleY(1.05);
+        transform: scale(1.05);
     }
     100% {
-        transform: scaleY(1);
+        transform: scale(1);
     }
 }
+
