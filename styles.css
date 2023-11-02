@@ -13,7 +13,6 @@ body {
     cursor: pointer;
 }
 
-/* Style for the circle animation */
 .circle-animation {
     position: fixed;
     border-radius: 50%;
