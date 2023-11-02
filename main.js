@@ -1,58 +1,70 @@
-let scene, camera, renderer, torus;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 
-function init() {
-    // Setup the basic Three.js scene
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({antialias: true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    
-    camera.position.z = 5;
-
-    // Create the torus
-    createTorus();
-
-    // Handle window resizing
-    window.addEventListener('resize', function() {
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        renderer.setSize(width, height);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
+const createSphere = (radius, color, opacity) => {
+    const geometry = new THREE.SphereGeometry(radius, 64, 64);
+    const material = new THREE.MeshPhongMaterial({
+        color: color,
+        transparent: true,
+        opacity: opacity,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
     });
+    return new THREE.Mesh(geometry, material);
+};
 
-    // Start the animation loop
-    animate();
-}
+const innerSphere = createSphere(1, 0x9a4be2, 0.5);
+scene.add(innerSphere);
 
-function createTorus() {
-    // Define the torus geometry and material
-    const geometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-    const material = new THREE.MeshBasicMaterial({color: 0x8a2be2});
-    torus = new THREE.Mesh(geometry, material);
+const middleSphere = createSphere(1.3, 0x8a2be2, 0.4);
+scene.add(middleSphere);
 
-    // Add the torus to the scene
-    scene.add(torus);
-}
+const outerSphere = createSphere(1.6, 0x7a1bd2, 0.3);
+scene.add(outerSphere);
 
-function animate() {
-    // This creates a loop that causes the renderer to draw the scene every time the screen is refreshed
+const light = new THREE.PointLight(0xFFFFFF, 1);
+light.position.set(2, 2, 5);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0x404040));
+
+const loader = new THREE.FontLoader();
+loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+    const textGeometry = new THREE.TextGeometry('Hello World', {
+        font: font,
+        size: 0.5,
+        height: 0.1,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.01,
+        bevelSize: 0.01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    });
+    const textMaterial = new THREE.MeshPhongMaterial({ color: 0xFFFFFF });
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    textMesh.position.set(-1.5, 0, 0);
+    scene.add(textMesh);
+});
+
+camera.position.z = 5;
+
+const animate = () => {
     requestAnimationFrame(animate);
-    
-    // Rotate the torus for some added visuals
-    torus.rotation.x += 0.005;
-    torus.rotation.y += 0.005;
-
-    // Pulsating effect for the torus
-    torus.scale.x = 1 + 0.1 * Math.sin(Date.now() * 0.001);
-    torus.scale.y = 1 + 0.1 * Math.sin(Date.now() * 0.001);
-    torus.scale.z = 1 + 0.1 * Math.sin(Date.now() * 0.001);
-
-    // Render the scene from the perspective of the camera
+    innerSphere.rotation.y += 0.005;
+    middleSphere.rotation.y -= 0.005;
     renderer.render(scene, camera);
-}
+};
 
-// Initialize everything
-init();
+animate();
+
+window.addEventListener('resize', () => {
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+});
