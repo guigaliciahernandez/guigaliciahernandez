@@ -1,11 +1,11 @@
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const createSphere = (radius, color, opacity) => {
+const createSphere = (radius, positionZ, color, opacity) => {
     const geometry = new THREE.SphereGeometry(radius, 64, 64);
     const material = new THREE.MeshPhongMaterial({
         color: color,
@@ -14,17 +14,14 @@ const createSphere = (radius, color, opacity) => {
         depthWrite: false,
         blending: THREE.AdditiveBlending
     });
-    return new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.z = positionZ;
+    return mesh;
 };
 
-const innerSphere = createSphere(1, 0x9a4be2, 0.5);
-scene.add(innerSphere);
-
-const middleSphere = createSphere(1.3, 0x8a2be2, 0.4);
-scene.add(middleSphere);
-
-const outerSphere = createSphere(1.6, 0x7a1bd2, 0.3);
-scene.add(outerSphere);
+scene.add(createSphere(1.6, 0, 0x7a1bd2, 0.3));
+scene.add(createSphere(1.3, 0.3, 0x8a2be2, 0.4));
+scene.add(createSphere(1, 0.6, 0x9a4be2, 0.5));
 
 const light = new THREE.PointLight(0xFFFFFF, 1);
 light.position.set(2, 2, 5);
@@ -54,8 +51,6 @@ camera.position.z = 5;
 
 const animate = () => {
     requestAnimationFrame(animate);
-    innerSphere.rotation.y += 0.005;
-    middleSphere.rotation.y -= 0.005;
     renderer.render(scene, camera);
 };
 
