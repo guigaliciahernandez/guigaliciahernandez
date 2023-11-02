@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s;
+}
+
+#smileWord {
+    font-size: 5em;
+    cursor: pointer;
+}
+
+/* Style for the circle animation */
+.circle-animation {
+    position: fixed;
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 0 0 100px 30px white; /* Default glow effect */
+}
