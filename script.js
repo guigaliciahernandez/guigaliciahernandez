@@ -23,7 +23,6 @@ function changeWord() {
     wordElement.style.backgroundImage = gradients[currentWordIndex];
     wordElement.style.webkitBackgroundClip = 'text';
     wordElement.style.color = 'transparent';
-    wordElement.style.textShadow = `3px 3px 5px ${gradients[currentWordIndex]}`;
 }
 
 function animateColorDrop(x, y) {
@@ -57,3 +56,4 @@ function initAnimation() {
 }
 
 initAnimation();
+
