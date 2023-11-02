@@ -2,15 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lava Lamp Effect</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Lava Lamp Animation</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
 </head>
 <body>
-    <div class="bubble" id="bubble1"></div>
-    <div class="bubble" id="bubble2"></div>
-    <div class="bubble" id="bubble3"></div>
-    <div class="bubble" id="bubble4"></div>
-    <!-- Add more bubbles as needed -->
-    <script src="script.js"></script>
+    <script src="https://threejs.org/build/three.js"></script>
+    <script>
+let scene, camera, renderer, sphere;
+
+function init() {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const material = new THREE.MeshBasicMaterial({ color: 0x8844AA, wireframe: true });
+    sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    camera.position.z = 15;
+
+    animate();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    sphere.rotation.x += 0.005;
+    sphere.rotation.y += 0.005;
+
+    renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', function() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+});
+
+init();
+
+    </script>
 </body>
 </html>
