@@ -6,9 +6,13 @@ camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0
 camera.position.z = 5;
 
 // Renderer
-renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // added alpha: true
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('scene-container').appendChild(renderer.domElement);
+
+// Add an ambient light
+let ambientLight = new THREE.AmbientLight(0xffffff, 0.5);  // soft white light
+scene.add(ambientLight);
 
 // Add Spheres with Gradient
 let geometry = new THREE.SphereGeometry(1, 32, 32);
@@ -49,6 +53,7 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix();
 });
 
-animate();
+console.log("Script Loaded and Running");  // Logging
 
+animate();
 
