@@ -1,25 +1,27 @@
-let words = ['EMBRACE', 'CHANGE', 'ENJOY', 'THE', 'RIDE', '😊'];
-let gradients = [
-    'linear-gradient(45deg, #7DF9FF, #FF4500)',
-    'linear-gradient(45deg, #FFD700, #7FFF00)',
-    'linear-gradient(45deg, #00BFFF, #FFC0CB)',
-    'linear-gradient(45deg, #FF4500, #00BFFF)',
-    'linear-gradient(45deg, #7DF9FF, #FFD700)',
-    'linear-gradient(45deg, #7FFF00, #FFC0CB)'
+const words = ["EMBRACE", "CHANGE", "AND", "ENJOY", "THE", "RIDE", "😀"];
+const gradients = [
+    "linear-gradient(90deg, #FF0066, #FF66FF)",
+    "linear-gradient(90deg, #FF6600, #FFCC00)",
+    "linear-gradient(90deg, #66FF66, #00FF66)",
+    "linear-gradient(90deg, #00FFCC, #00CCFF)",
+    "linear-gradient(90deg, #0066FF, #6600FF)",
+    "linear-gradient(90deg, #FF0066, #FF6600)",
+    "linear-gradient(90deg, #FF6600, #FF66FF)"
 ];
 let currentWordIndex = 0;
 
-document.getElementById('word').addEventListener('click', function() {
-    changeWord();
-    animateColorDrop(window.innerWidth / 2, window.innerHeight / 2);
-});
-
 function changeWord() {
+    const textElement = document.getElementById("animated-text");
+    textElement.textContent = words[currentWordIndex];
+    textElement.style.backgroundImage = gradients[currentWordIndex];
     currentWordIndex = (currentWordIndex + 1) % words.length;
-    document.getElementById('word').innerHTML = words[currentWordIndex];
-    document.getElementById('word').style.background = gradients[currentWordIndex];
-    document.getElementById('word').style.textShadow = `0 0 10px ${gradients[currentWordIndex]}, 0 0 20px ${gradients[currentWordIndex]}, 0 0 30px ${gradients[currentWordIndex]}`;
+
+    setTimeout(changeWord, 1000);
 }
+
+document.body.addEventListener("click", function (event) {
+    animateColorDrop(event.clientX, event.clientY);
+});
 
 function animateColorDrop(x, y) {
     const circle = document.createElement("div");
@@ -42,5 +44,4 @@ function animateColorDrop(x, y) {
     });
 }
 
-// Automatically change words at an interval
-setInterval(changeWord, 800);
+changeWord();
