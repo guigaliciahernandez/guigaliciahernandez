@@ -14,29 +14,49 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-color: white;
         }
-        .centered {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        #liquidWord {
             font-size: 5em;
-            cursor: pointer;
-            transition: font-size 0.5s;
+            opacity: 0;
         }
     </style>
 </head>
 <body>
-    <div id="liquidWord" class="centered">EMBRACE</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <div id="liquidWord">EMBRACE</div>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
     <script>
-        let liquidWord = document.getElementById('liquidWord');
-        liquidWord.addEventListener('click', function() {
-            this.style.transform = "scale(1.5)";
-            setTimeout(() => {
-                this.style.transform = "scale(1)";
-            }, 200);
-        });
+        function animateWord() {
+            anime.timeline({
+                loop: true
+            })
+            .add({
+                targets: '#liquidWord',
+                opacity: 1,
+                duration: 1000,
+                easing: 'easeOutExpo',
+                complete: function(anim) {
+                    setTimeout(changeWord, 1000);
+                }
+            })
+            .add({
+                targets: '#liquidWord',
+                opacity: 0,
+                duration: 1000,
+                easing: 'easeOutExpo',
+                delay: 2000
+            });
+        }
+
+        function changeWord() {
+            const words = ['EMBRACE', 'CHANGE', 'LIFE'];
+            const currentWord = document.getElementById('liquidWord').innerText;
+            const currentIndex = words.indexOf(currentWord);
+            const nextIndex = (currentIndex + 1) % words.length;
+            document.getElementById('liquidWord').innerText = words[nextIndex];
+        }
+
+        animateWord();
     </script>
 </body>
 </html>
